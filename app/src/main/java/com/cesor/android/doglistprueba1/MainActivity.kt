@@ -2,6 +2,7 @@ package com.cesor.android.doglistprueba1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -58,6 +59,10 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener{
     private fun showError() {
         Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
     }
+    private fun hideKeyboard(){
+        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+    }
 
 
     /*
@@ -67,6 +72,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener{
         if (!query.isNullOrEmpty()){
             searchByName(query.trim().lowercase())
         }
+        hideKeyboard()
         return true
     }
 
